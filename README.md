@@ -1,3 +1,3 @@
 # Szakdolgozat:
 Kisvállalati Számítógépes Mentési Rendszerek Linux-os Alapokon
-NYE PTI Szakdolgozat 2017
+NYE PTI 2017
