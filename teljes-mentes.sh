@@ -44,17 +44,16 @@ mkdir -p "$LOCAL_BACKUP_PATH/yearly"
 
 #  Függvény, mely kiírja a képernyőre a friss mentés méretét és md5 hash értékét
 function get_new_backup_data {
-    ##!!!!!!!! -e is needed to have color options.
     echo -e "A friss mentés (${DB_NAME}_backup_$DATE_TODAY.sql) mérete: ${BLUE}$new_backup_size ${NC}byte,"
     echo -e "md5 hash értéke: ${BLUE}$new_backup_md5 ${NC}"
 }
 
-#  Függvény, mely visszaadja az argumentumként megadott file méretét
+#  Függvény, mely visszaadja az paraméterként megadott file méretét
 function get_file_size {
     echo "$(stat -c %s $1 2>/dev/null )"
 }
 
-#  Függvény, mely visszaadja az argumentumként megadott file md5 hash értékét
+#  Függvény, mely visszaadja az paraméterként megadott file md5 hash értékét
 function get_file_md5 {
     echo "$(head -n -1 $1 | md5sum | awk '{ print $1 }')"
 }
@@ -115,7 +114,7 @@ function check_backup {
                     remove_oldies $DAYS_TO_STAY
                 ;;
                 "weekly")
-                    # A ${#VALTOZO} kifejezés megadja a változó karakterhosszát, azért így, mert változó lehet az db név hossza, amivel a fájl kezdődik
+                    # A ${#VALTOZO} kifejezés megadja a változó karakterhosszát, azért így, mert változó hosszúságú lehet az adatbázis név hossza, amivel a fájl kezdődik
                     year_latest=${file_latest_local:${#file_latest_local}-17:4}
                     month_latest=${file_latest_local:${#file_latest_local}-13:2}
                     day_latest=${file_latest_local:${#file_latest_local}-11:2}
@@ -129,7 +128,6 @@ function check_backup {
                     fi
                 ;;
                 "yearly")
-                    # A ${#VALTOZO} kifejezés megadja a változó karakterhosszát, azért így, mert változó lehet az db név
                     year_latest=${file_latest_local:${#file_latest_local}-17:4}
                     if [ "$(date +'%Y')" != "$year_latest" ]; then
                         get_old_backup_data $1

@@ -39,7 +39,7 @@ rsync -HavXx --delete -e "ssh -p $SERVER_PORT" $SERVER_LOGIN:${SERVER_PATH} ${LO
 transferred_files=$(awk '/Number of regular files transferred/{print $NF}' ${LOCAL_BACKUP_PATH}/rsyncstats.txt)
 echo -e "${BLUE}Szinkronizált fájlok száma: $transferred_files${NC}"
 
-#  Függvény, átmásolja a backupot az argumentumnak megkapott mappába
+#  Függvény, átmásolja a backupot az paraméterként megkapott mappába
 function copy_backup {
     echo -e "${BLUE}\nÚj backup mentése a $1 mappába${NC}"
     mkdir -p "$LOCAL_BACKUP_PATH/$1/$DATE_TODAY"
@@ -79,7 +79,7 @@ function check_backup {
                     remove_oldies $DAYS_TO_STAY daily
                 ;;
                 "weekly")
-                    # A ${#VALTOZO} kifejezés megadja a változó karakterhosszát, azért így, mert változó lehet az db név hossza, amivel a fájl kezdődik
+                    # A ${#VALTOZO} kifejezés megadja a változó karakterhosszát, azért így, mert változó hosszúságú lehet az adatbázis név hossza, amivel a fájl kezdődik
                     year_latest=${dir_latest_local:${#dir_latest_local}-13:4}
                     month_latest=${dir_latest_local:${#dir_latest_local}-9:2}
                     day_latest=${dir_latest_local:${#dir_latest_local}-7:2}
