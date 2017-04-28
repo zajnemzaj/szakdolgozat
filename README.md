@@ -1,3 +1,3 @@
 # Szakdolgozat:
-Kisvállalati Számítógépes Mentési Rendszerek Linux-os Alapokon
+Kisvállalati számítógépes mentési rendszerek linuxos alapokon
 NYE PTI 2017
